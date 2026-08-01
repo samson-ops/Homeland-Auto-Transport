@@ -48,13 +48,16 @@ section{padding:78px 0}
 .road-divider{height:6px;background:repeating-linear-gradient(90deg,var(--stripe) 0 46px,transparent 46px 78px);opacity:.9}
 
 /* ---- header ---- */
-header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line);transition:box-shadow .2s}
+header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.97);backdrop-filter:saturate(1.2) blur(8px);border-bottom:2px solid var(--line);transition:box-shadow .2s,border-color .2s}
+header.scrolled{border-color:transparent}
 header.scrolled{box-shadow:0 4px 18px rgba(16,38,58,.10)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:84px}
 .logo img{height:52px;width:auto}
-nav.menu{display:flex;align-items:center;gap:26px}
-nav.menu a{color:var(--ink);font-weight:600;font-size:15.5px}
-nav.menu a:hover{color:var(--blue)}
+nav.menu{display:flex;align-items:center;gap:6px}
+nav.menu a{position:relative;color:#33414F;font-weight:600;font-size:14.5px;letter-spacing:.02em;padding:10px 14px;border-radius:8px;transition:color .15s,background .15s}
+nav.menu a::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:2.5px;background:var(--blue);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .18s ease}
+nav.menu a:hover{color:var(--blue-dark);background:var(--blue-tint)}
+nav.menu a:hover::after{transform:scaleX(1)}
 .btn-phone{display:inline-flex;align-items:center;gap:11px;font-family:var(--font-body);font-weight:700;font-size:18px;letter-spacing:.01em;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 20px 10px 12px;transition:border-color .15s,box-shadow .15s,transform .15s;white-space:nowrap}
 .btn-phone .pic{flex:none;width:34px;height:34px;border-radius:8px;background:var(--blue);display:grid;place-items:center}
 .btn-phone small{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--slate);line-height:1.2}
@@ -63,7 +66,8 @@ nav.menu a:hover{color:var(--blue)}
 .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px}
 .hamburger span{display:block;width:26px;height:3px;background:var(--ink);margin:5px 0;border-radius:2px}
 .mobile-menu{display:none;background:#fff;border-top:1px solid var(--line);padding:10px 22px 22px}
-.mobile-menu a{display:block;padding:12px 4px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--line)}
+.mobile-menu a{display:block;padding:13px 6px;font-weight:600;font-size:15.5px;letter-spacing:.02em;color:#33414F;border-bottom:1px solid var(--line)}
+.mobile-menu a:active{color:var(--blue-dark)}
 .mobile-menu .btn{margin-top:16px;width:100%;justify-content:center}
 .mobile-menu.open{display:block}
 @media(max-width:920px){nav.menu,.nav>.btn-phone{display:none}.hamburger{display:block}}
