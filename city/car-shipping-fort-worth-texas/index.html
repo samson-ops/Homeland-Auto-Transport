@@ -264,13 +264,17 @@ footer ul a:hover{color:#fff}
 /* ===== mobile behavior ===== */
 @media(max-width:920px){
   /* Widget immediately after the H1 on mobile */
-  .hero-grid{display:flex;flex-direction:column;gap:26px}
+  .hero-grid{display:flex;flex-direction:column;align-items:stretch;gap:22px}
   .hero-grid>div:first-child{display:contents}
+  .hero-grid>*{width:100%;flex:0 0 auto}
   .hero-grid .eyebrow{order:1}
   .hero-grid h1{order:2;margin-bottom:0}
-  .hero-grid .quote-widget{order:3}
-  .hero-grid .lead{order:4}
-  .hero-grid .checks{order:5}
+  .hero-grid .quote-widget{order:3;width:100%}
+  .hero-grid .quote-widget iframe{width:100%}
+  .hero-grid .lead{order:4;max-width:none;margin-top:0}
+  .hero-grid .checks{order:5;margin:0 0 4px}
+  /* H1 stays on a single line */
+  .hero h1{font-size:clamp(22px,6.2vw,40px);white-space:nowrap}
 }
 /* No horizontal drift on any screen */
 html,body{overflow-x:hidden}
@@ -698,6 +702,25 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 document.getElementById('yr').textContent=new Date().getFullYear();
+
+(function(){
+  var h=document.querySelector('.hero h1');
+  if(!h) return;
+  function fit(){
+    if(window.innerWidth>920){h.style.fontSize='';h.style.whiteSpace='';return;}
+    h.style.whiteSpace='nowrap';
+    var box=h.parentElement;
+    var avail=(box?box.clientWidth:h.clientWidth);
+    if(!avail) return;
+    var size=42;
+    h.style.fontSize=size+'px';
+    while(h.scrollWidth>avail && size>14){size-=1;h.style.fontSize=size+'px';}
+  }
+  fit();
+  addEventListener('resize',fit);
+  addEventListener('load',fit);
+})();
+
 </script>
 </body>
 </html>
